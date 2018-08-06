@@ -29,13 +29,13 @@ Links:
 
 ### File Information <a name="fileInfo"/>
 
-1. train.py - This file imports the inception v3 model.  Imports the images from a google cloud bucket directory called "snake_images_train".  Creates preprocessed images and sends the images to another directory called "preprocesseddata".  Uses the preprocessed images in order to create a model.    
+1. train.py - This file imports the inception v3 model.  Imports the images from a google cloud bucket directory that contains the training images.  Creates preprocessed images and sends the images preprocess directory.  Uses the preprocessed images in order to create a model.  Deploys model in the model directory.
 
-2. validate.py - 
+2. validate.py - Imports images from the validation bucket.  Performs prediction on the validation images (test images).  
 
 3. App Engine Folder - 
 
-    1.  app.yaml
+    1.  app.yaml - Configuration file for App Engine's settings.  
     2.  appengine_config.py
     3.  main.py
     4.  main_test.py
@@ -52,11 +52,41 @@ Links:
 3. Google Cloud - https://cloud.google.com/products/
     * Cloud Datalab - https://cloud.google.com/datalab/
     * App Engine - https://cloud.google.com/appengine/ 
+
   
 ## How to Run <a name="run"/>
 
-## License <a name="license"/>
+1. Run train.py first in order to train the model.  The model is trained using images found online.  Create a csv file where the first column represents the link of the image and the second column represents the label of the image.  Store the csv file in a google bucket and change the link in line 13 to match the google cloud bucket you stored the csv file. 
 
+Lines 13 and 14 contains the following.
+``` Python
+training_data = CsvDataSet('gs://my-bucket/snake_images_train'
+			, schema='image_url:STRING,label:STRING')
+
+```
+
+2. In train.py set the bucket to where you want to store the preprocessed images and model.  Change lines 6-9 accordingly.  
+
+3. Name the model and set the version number.  For example the model classifies subspecies of snake and the version of the model is 'beta1'.  
+
+``` Python
+Models().create('snake')
+ModelVersions('snake').deploy('beta1', model_dir)
+```
+
+4. Run validate.py in order to test the model.  Make sure the bucket that stores the validation csv is set.  
+
+Lines 7 and 8 contain the following:
+```Python
+#set the validation_data to the validation data on google cloud
+validation_data = CsvDataSet('gs://my-bucket/snake_images_validation'
+			, schema='image_url:STRING,label:STRING')
+```
+
+5. 
+
+
+## License <a name="license"/>
 MIT License
 
 Copyright (c) [year] [fullname]
