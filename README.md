@@ -36,13 +36,20 @@ Links:
 3. App Engine Folder - 
 
     1.  app.yaml - Configuration file for App Engine's settings.  
-    2.  appengine_config.py
-    3.  main.py
-    4.  main_test.py
+    2.  appengine_config.py - Copy third party libraries into application directory. 
+    3.  main.py - Deploys the image classification model as a web application.
+    4.  main_test.py - Test web application.
 
 ### Helpful Links <a name="concepts"/>
 
 1. Further explaination of transfer learning process: https://codelabs.developers.google.com/codelabs/cpb102-txf-learning/index.html?index=..%2F..%2Findex#0
+
+2. Additional information on app.yaml: https://cloud.google.com/appengine/docs/standard/python/config/appref
+
+3. Additional information on appengine_config.py: https://cloud.google.com/appengine/docs/standard/python/tools/using-libraries-python-27
+
+4. How to deploy model: https://cloud.google.com/appengine/docs/standard/python/getting-started/deploying-the-application
+
 
 
 ## Requirements <a name="requirements"/>
@@ -83,7 +90,11 @@ validation_data = CsvDataSet('gs://my-bucket/snake_images_validation'
 			, schema='image_url:STRING,label:STRING')
 ```
 
-5. 
+5. In the main.py file (located in the App Engine folder) make sure the project name, model name and model version match the corresponding files in train.py and validate.py.  These are found in lines 35-38.  
+
+6. OAuth is used to authenticate the application.  Link: https://cloud.google.com/appengine/docs/standard/python/oauth/#oauth_20_and_openid_connect
+
+7. Deploy the application using the steps from the following link: https://cloud.google.com/appengine/docs/standard/python/getting-started/deploying-the-application
 
 
 ## License <a name="license"/>
