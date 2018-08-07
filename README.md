@@ -28,6 +28,7 @@ Links:
 
 
 ### File Information <a name="fileInfo"/>
+The following is done in a Google Cloud Datalab environment. 
 
 1. train.py - This file imports the inception v3 model.  Imports the images from a google cloud bucket directory that contains the training images.  Creates preprocessed images and sends the images preprocess directory.  Uses the preprocessed images in order to create a model.  Deploys model in the model directory.
 
