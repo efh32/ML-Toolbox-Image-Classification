@@ -28,7 +28,6 @@ Links:
 
 
 ### File Information <a name="fileInfo"/>
-The following is done in a Google Cloud Datalab environment. 
 
 1. train.py - This file imports the inception v3 model.  Imports the images from a google cloud bucket directory that contains the training images.  Creates preprocessed images and sends the images preprocess directory.  Uses the preprocessed images in order to create a model.  Deploys model in the model directory.
 
@@ -63,6 +62,7 @@ The following is done in a Google Cloud Datalab environment.
 
   
 ## How to Run <a name="run"/>
+The following is done in a Google Cloud Datalab environment.  To learn how to start using Datalab, refer to [this link](https://cloud.google.com/datalab/docs/quickstart).  
 
 1. Run train.py first in order to train the model.  The model is trained using images found online.  Create a csv file where the first column represents the link of the image and the second column represents the label of the image.  Store the csv file in a google bucket and change the link in line 13 to match the google cloud bucket you stored the csv file. 
 
