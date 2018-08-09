@@ -2,7 +2,7 @@
 
 ## Project Description <a name="descrip"/> 
 
-This is an image classification model that discerns different species of snakes.  This model is trained using transfer learning.  The model utilizes the feature extraction portion of the Inception-v3 model inorder to preprocess the snake images.  These preprocessed snake images are then used to train a new classifier.  The model can be deployed using Google's App Engine.  
+This is an image classification model that discerns different species/subspecies of snakes using transfer learning.The model utilizes the feature extraction portion of the Inception-v3 model inorder to preprocess the snake images.  These preprocessed snake images are then used to train a new classifier.  The model can be modified to classify a different set of images.  The model can be deployed a web application using Google's App Engine.  
 
 Links: 
 1) https://www.tensorflow.org/hub/tutorials/image_retraining
@@ -29,9 +29,9 @@ Links:
 
 ### File Information <a name="fileInfo"/>
 
-1. train.py - This file imports the inception v3 model.  Imports the images from a google cloud bucket directory that contains the training images.  Creates preprocessed images and sends the images preprocess directory.  Uses the preprocessed images in order to create a model.  Deploys model in the model directory.
+1. train.py - The Inception V3 model is imported and used to preprocess training images stored in a Google Cloud bucket.  The processed images are then used to train a model.  The model is deployed into the model directory.
 
-2. validate.py - Imports images from the validation bucket.  Performs prediction on the validation images (test images).  
+2. validate.py - Performs predictions on the validation images(test images).  
 
 3. App Engine Folder - 
 
