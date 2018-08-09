@@ -121,7 +121,7 @@ credentials = ServiceAccountCredentials.from_json_keyfile_name('Credential_name.
 ```
 
 
-7. Deploy the application using the steps from the following link: https://cloud.google.com/appengine/docs/standard/python/getting-started/deploying-the-application
+7. Deploy the application in datalab using the steps from the following link: https://cloud.google.com/appengine/docs/standard/python/getting-started/deploying-the-application
 
 
 ## License <a name="license"/>
