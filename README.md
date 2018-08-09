@@ -66,7 +66,7 @@ The following is done in a Google Cloud Datalab environment.  To learn how to st
 
 1. Run train.py first in order to train the model.  The model is trained using images found online.  Create a csv file where the first column represents the link of the image and the second column represents the label of the image.  Store the csv file in a google bucket and change the link in line 13 to match the google cloud bucket you stored the csv file. 
 
-Lines 13 and 14 contains the following.
+Lines 13 and 14 in train.py contain the following.  Change the first argument in the CsvDataSet function to match the bucket that stores the csv file used to train the model.  
 ``` Python
 training_data = CsvDataSet('gs://my-bucket/snake_images_train'
 			, schema='image_url:STRING,label:STRING')
@@ -75,8 +75,17 @@ training_data = CsvDataSet('gs://my-bucket/snake_images_train'
 
 2. In train.py set the bucket to where you want to store the preprocessed images and model.  Change lines 6-9 accordingly.  
 
+Lines 6-9 in train.py contain the following.  Change the bucket variable to match the Google Cloud bucket link where the model will be deployed.
+``` Python
+bucket = 'gs://my-bucket'
+preprocess_dir = bucket + '/preprocesseddata'
+model_dir = bucket + '/model'
+staging_dir = bucket + '/stagin
+```
+
 3. Name the model and set the version number.  For example the model classifies subspecies of snake and the version of the model is 'beta1'.  
 
+Lines 25 and 26 contain the following.  
 ``` Python
 Models().create('snake')
 ModelVersions('snake').deploy('beta1', model_dir)
@@ -84,16 +93,33 @@ ModelVersions('snake').deploy('beta1', model_dir)
 
 4. Run validate.py in order to test the model.  Make sure the bucket that stores the validation csv is set.  
 
-Lines 7 and 8 contain the following:
+Lines 7 and 8 in validate.py contain the following.  Change to first argument in the CsvDataSet function to match the location of the validation set.
 ```Python
 #set the validation_data to the validation data on google cloud
 validation_data = CsvDataSet('gs://my-bucket/snake_images_validation'
 			, schema='image_url:STRING,label:STRING')
 ```
 
-5. In the main.py file (located in the App Engine folder) make sure the project name, model name and model version match the corresponding files in train.py and validate.py.  These are found in lines 35-38.  
+5. In the main.py file (located in the App Engine folder) make sure the project name, model name and model version match the corresponding variables located in train.py and validate.py.  
 
-6. OAuth is used to authenticate the application.  Link: https://cloud.google.com/appengine/docs/standard/python/oauth/#oauth_20_and_openid_connect
+Lines 35-38 in main.py contain the project name, model name and model version.  
+``` Python
+project_name = 'my_project'
+model_name = 'snake'
+model_version ='beta1'
+```
+
+6. OAuth is used to authenticate the use of the model for our App Engine main.py file.  
+Follow the instructions in this link to generate OAuth credential.  Download the credential as a .json file.   
+Link: https://cloud.google.com/video-intelligence/docs/common/auth
+
+Store the credential in the same directory where the main.py is located in.  Change line 26 so that the argument in the function matches the name of the .json credential.  
+
+The following is line 26 in main.py.
+```Python
+credentials = ServiceAccountCredentials.from_json_keyfile_name('Credential_name.json')
+```
+
 
 7. Deploy the application using the steps from the following link: https://cloud.google.com/appengine/docs/standard/python/getting-started/deploying-the-application
 
